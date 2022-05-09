@@ -1,6 +1,5 @@
 import Helper.Misc;
 import Web.MyDriver;
-import com.sun.org.apache.xerces.internal.util.SynchronizedSymbolTable;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -8,7 +7,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-public class HomeWork2_Sol {
+public class HomeWork2 {
     /**
      * Testcase-1:
      * <p>
