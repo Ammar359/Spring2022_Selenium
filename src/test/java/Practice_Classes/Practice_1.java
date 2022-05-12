@@ -94,6 +94,58 @@ public class Practice_1 {
         Assert.assertEquals(url,currentUrl,"current url is not same as expected");
     }
 
+    // TC-2: Verify the url stays same after refreshing the facebook home page
+    /*
+        1. Launch a new browser window
+        2. Open facebook.com
+        3. Observe the url-value
+        4. Refresh the webpage
+        5. Verify url value is same as of Step-3
+
+     */
+    @Test
+    public void pageRefresh(){
+        MyDriver.launchUrlOnNewWindow("https:www.facebook.com");
+        WebDriver driver = new ChromeDriver();
+
+        MyDriver.getDriver().manage().window().maximize();
+        String urlBeforeRefresh = MyDriver.getDriver().getCurrentUrl();
+
+        Misc.pause(4);
+
+        MyDriver.getDriver().navigate().refresh();
+
+        String urlAfterRefresh = MyDriver.getDriver().getCurrentUrl();
+        Assert.assertEquals(urlBeforeRefresh,urlAfterRefresh,"Url before refresh is not same to url after refresh");
+
+        MyDriver.quitWindows();
+
+
+
+    }
+
+    // TC-3: Verify current url is ending with "/" on facebook home page
+    @Test
+    public void endsWithSlash(){
+        MyDriver.launchUrlOnNewWindow("https:www.facebook.com");
+        MyDriver.getDriver().manage().window().maximize();
+
+        Misc.pause(3);
+        String urlAfterLaunch = MyDriver.getDriver().getCurrentUrl();
+        boolean endsWithSlash = urlAfterLaunch.endsWith("/");
+        Assert.assertTrue(endsWithSlash,"Url doesnt ends with slash");
+
+        MyDriver.quitWindows();
+
+    }
+
+
+
+
+
+
+
+
 
 
 

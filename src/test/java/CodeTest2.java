@@ -1,13 +1,67 @@
 import Web.MyDriver;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
 
-import java.util.Arrays;
-import java.util.HashSet;
+import java.util.ArrayList;
 
 public class CodeTest2 {
+
+    /**
+     * Ques-2:
+     * Verify feelsLike-temp value is in between the low-temp value and high-temp value
+     * Web: https://www.darksky.net/
+     * points: 20
+     */
+
+    @Test
+    public void verifyTempSort() {
+
+        MyDriver.launchUrlOnNewWindow("https://www.darksky.net/");
+
+        MyDriver.getDriver().manage().window().maximize();
+
+        String feelsLikeTemp = "//span[@class='feels-like-text']";
+        By feelsLikeTempXpathLocByXpath = By.xpath(feelsLikeTemp);
+        WebElement feelsLikeTempLocator = MyDriver.getDriver().findElement(feelsLikeTempXpathLocByXpath);
+
+        String feelsLikeDisplayedF = feelsLikeTempLocator.getText();
+        String feelsLikeDisplayedFRemoved = feelsLikeDisplayedF.substring(0, feelsLikeDisplayedF.length() - 1);
+        double feelsLikeTempValue = Integer.parseInt(feelsLikeDisplayedFRemoved);
+
+        String lowTemp = "//span[@class='low-temp-text']";
+        By lowTempXpathLocByXpath = By.xpath(lowTemp);
+        WebElement lowTempLocator = MyDriver.getDriver().findElement(lowTempXpathLocByXpath);
+
+        String lowTempDisplayedF = lowTempLocator.getText();
+        String lowTempDisplayedFDegRemoved = lowTempDisplayedF.substring(0, lowTempDisplayedF.length() - 1);
+        double lowTemValue = Integer.parseInt(lowTempDisplayedFDegRemoved);
+
+        String highTemp = "//span[@class='high-temp-text']";
+        By highTempXpathLocByXpath = By.xpath(highTemp);
+        WebElement highTempLocator = MyDriver.getDriver().findElement(highTempXpathLocByXpath);
+
+        String highTempDisplayedF = highTempLocator.getText();
+        String highTempDisplayedFDegRemoved = highTempDisplayedF.substring(0, highTempDisplayedF.length() - 1);
+        double highTempValue = Integer.parseInt(highTempDisplayedFDegRemoved);
+
+
+        System.out.println(feelsLikeTempValue + "\n" + lowTemValue + "\n" + highTempValue);
+
+        if (feelsLikeTempValue >= lowTemValue)
+            System.out.println("Feels like Temperature is higher or equal than low Temperature");
+        else
+            System.out.println("Feels like Temperature is not higher or equal than low Temperature");
+
+        if (feelsLikeTempValue <= highTempValue)
+            System.out.println("Feels like Temperature is lower or equal than high Temperature");
+        else
+            System.out.println("Feels like Temperature is not lower or equal than high Temperature");
+
+        MyDriver.quitWindows();
+
+    }
+
     /**
      * Ques-1:
      * Create a method to return factorial value of input-int-value
@@ -79,146 +133,114 @@ public class CodeTest2 {
 
 
     /**
+     * Ques-3:
+     * Create a method to return the common Strings values in two input-String-arrays
+     * points: 30
+     */
+
+        //Method For the Question 3
+
+    public static void commonValues(String[] inputA , String[] inputB ){
+
+        boolean commonValuesPresent = false;
+        ArrayList<String> commonValues = new ArrayList<>();
+
+        for (String valA : inputA){
+            for (String valB : inputB) {
+                if (valA.equalsIgnoreCase(valB)) {
+                    commonValues.add(valB);
+                    commonValuesPresent = true;
+                }
+            }
+        }
+        if (!commonValuesPresent){
+            System.out.println("There are no common values");
+        } else {
+            System.out.println("\nCommon Values --> " + commonValues);
+
+
+        }
+    }
+
+    /**
+     * ANOTHER METHOD TO SOLVE ABOVE QUESTION
+     *       String[] array1 = {"happy", "king", "peace", "living standard"};
+     *             String[] array2 = {"king kong", "happy", "PEACE"};
+     *
+     *             System.out.println("Array1 : " + Arrays.toString(array1));
+     *             System.out.println("Array2 : " + Arrays.toString(array2));
+     *
+     *             HashSet<String> set = new HashSet<String>();
+     *
+     *             for (int i = 0; i < array1.length; i++) {
+     *                 for (int j = 0; j < array2.length; j++) {
+     *                     if (array1[i].equals(array2[j])) {
+     *                         set.add(array1[i]);
+     *                     }
+     *                 }
+     *             }
+     *             // return common elements.
+     *             System.out.println("Common elements ---> " + (set));
+     *         }
+     */
+
+    /**
      * Ques-4:
      * Create a method to return missing smallest positive integer (greater than 0) from given int-array.
      * points: 40
      */
-    /*
-     *
-     * eg:
-     * 	input -> : {3, 5, 1, 4, 2, 7}
-     * 	returned value : 6
-     *
-     * 	input -> : {3, 5, 1, 4, 2}
-     * 	returned value : 6
-     *
-     * 	input -> {2, 5, -1, 0, 6}
-     * 	returned value : 1
-     *
-     * 	input -> {0, 5, -1, 1, 2, 5, 3, 7, 1, 2}
-     * 	returned value : 4
-     *
-     * 	input -> {-2, -5, -1, -10, -6}
-     * 	returned value : 1
-     *
-     */
 
+    // Method For the Question 4
 
-        /**
-         * Ques-3:
-         * Create a method to return the common Strings values in two input-String-arrays
-         * points: 30
-         * Note: two input-String-arrays can be of same size or different size
-         */
-        /*
-         *
-         * eg:
-         * input -> {"happY", "king", "peace", "living standard"} , {"king kong", "Happy", "PEACE"}
-         * returned value -> [happy, peace]
-         *
-         * input -> {“ab”, “abcd”, “abc”, “abcde”, “defg”, "koli”} , {“abcde”, “jhuy”, “plot”, “koli”}
-         * returned value -> [abcde, koli]
-         *
-         */
-        @Test
-        public void commonValues() {
+    public static int missingSmallestPositiveInteger(int[] input) {
 
-            String[] array1 = {"happy", "king", "peace", "living standard"};
-            String[] array2 = {"king kong", "happy", "PEACE"};
+        for(int i = 0 ; i < input.length ; i++){ //  input -> Ascending order and find missmin
+            int minimumIndex = i ;
 
-            System.out.println("Array1 : " + Arrays.toString(array1));
-            System.out.println("Array2 : " + Arrays.toString(array2));
-
-            HashSet<String> set = new HashSet<String>();
-
-            for (int i = 0; i < array1.length; i++) {
-                for (int j = 0; j < array2.length; j++) {
-                    if (array1[i].equals(array2[j])) {
-                        set.add(array1[i]);
-                    }
-                }
+            for (int j = i+1 ; j < input.length ; j++){
+                if(input[minimumIndex] > input[j])
+                    minimumIndex = j ;
             }
-            // return common elements.
-            System.out.println("Common elements ---> " + (set));
+            int val = input[i];
+            input[i] =input[minimumIndex];
+            input[minimumIndex] = val;
         }
 
-        @Test
-        public void commonValues1() {
-
-            String[] array1 = {"ab", "abcd", "abc", "abcde", "defg", "koli"};
-            String[] array2 = {"abcde", "koli",};
-
-            System.out.println("Array1 : " + Arrays.toString(array1));
-            System.out.println("Array2 : " + Arrays.toString(array2));
-
-            HashSet<String> set = new HashSet<String>();
-
-            for (int i = 0; i < array1.length; i++) {
-                for (int j = 0; j < array2.length; j++) {
-                    if (array1[i].equals(array2[j])) {
-                        set.add(array1[i]);
-                    }
-                }
-            }
-            // return common elements.
-            System.out.println("Common elements --->" + (set));
+        int smallestMissingValue = 1;
+        for(int i = 0 ; i < input.length ; i++){
+            if(input[i] == smallestMissingValue)
+                smallestMissingValue++;
+            else if (input[i] > smallestMissingValue)
+                break;;
         }
+        return smallestMissingValue;
+    }
+
+    public static void main(String[] args) {
 
 
-        /**
-         * Ques-2:
-         * Verify feelsLike-temp value is in between the low-temp value and high-temp value
-         * Web: https://www.darksky.net/
-         * points: 20
-         */
+        //Question 3
 
-        @Test
-        public void verifyTempSort() {
+        String[] inputA = {"happY", "king", "peace", "living standard"};
+        String[] inputB = {"king kong", "Happy", "PEACE"};
 
-            MyDriver.launchUrlOnNewWindow("https://www.darksky.net/");
-
-            MyDriver.getDriver().manage().window().maximize();
-
-            String feelsLikeTemp = "//span[@class='feels-like-text']";
-            By feelsLikeTempXpathLocByXpath = By.xpath(feelsLikeTemp);
-            WebElement feelsLikeTempLocator = MyDriver.getDriver().findElement(feelsLikeTempXpathLocByXpath);
-
-            String feelsLikeDisplayedF = feelsLikeTempLocator.getText();
-            String feelsLikeDisplayedFRemoved = feelsLikeDisplayedF.substring(0, feelsLikeDisplayedF.length() - 1);
-            double feelsLikeTempValue = Integer.parseInt(feelsLikeDisplayedFRemoved);
-
-            String lowTemp = "//span[@class='low-temp-text']";
-            By lowTempXpathLocByXpath = By.xpath(lowTemp);
-            WebElement lowTempLocator = MyDriver.getDriver().findElement(lowTempXpathLocByXpath);
-
-            String lowTempDisplayedF = lowTempLocator.getText();
-            String lowTempDisplayedFDegRemoved = lowTempDisplayedF.substring(0, lowTempDisplayedF.length() - 1);
-            double lowTemValue = Integer.parseInt(lowTempDisplayedFDegRemoved);
-
-            String highTemp = "//span[@class='high-temp-text']";
-            By highTempXpathLocByXpath = By.xpath(highTemp);
-            WebElement highTempLocator = MyDriver.getDriver().findElement(highTempXpathLocByXpath);
-
-            String highTempDisplayedF = highTempLocator.getText();
-            String highTempDisplayedFDegRemoved = highTempDisplayedF.substring(0, highTempDisplayedF.length() - 1);
-            double highTempValue = Integer.parseInt(highTempDisplayedFDegRemoved);
+        commonValues(inputA,inputB);
 
 
-            System.out.println(feelsLikeTempValue + "\n" + lowTemValue + "\n" + highTempValue);
+        //Question 4
 
-            if (feelsLikeTempValue >= lowTemValue)
-                System.out.println("Feels like Temperature is higher or equal than low Temperature");
-            else
-                System.out.println("Feels like Temperature is not higher or equal than low Temperature");
+        int[] input = {3, 5, 1, 4, 2, 7};
 
-            if (feelsLikeTempValue <= highTempValue)
-                System.out.println("Feels like Temperature is lower or equal than high Temperature");
-            else
-                System.out.println("Feels like Temperature is not lower or equal than high Temperature");
+        int missingPosInt = missingSmallestPositiveInteger(input);
 
-            MyDriver.quitWindows();
+        System.out.println("\nMissing Smallest Positive Integer is " + missingPosInt);
 
-        }
+        int[] input1 = {2, 5, -1, 0, 6};
+
+        int missingPosInt1 = missingSmallestPositiveInteger(input);
+
+        System.out.println("\nMissing Smallest Positive Integer is " + missingPosInt1);
+
 
 
     }
@@ -227,4 +249,4 @@ public class CodeTest2 {
 
 
 
-
+}
