@@ -29,6 +29,6 @@ public class MyDriver {
     }
 
 
-
-
+    public static void quitWindow() {
+    }
 }

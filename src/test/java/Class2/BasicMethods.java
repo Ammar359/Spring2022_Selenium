@@ -13,11 +13,10 @@ public class BasicMethods {
     public void basicMethods() {
 
         // path of chromedriver
+        System.setProperty("webdriver.chrome.driver", "./Drivers/chromedriver");
 
-
-
-
-         /**
+        WebDriver driver = new ChromeDriver();
+        /**
          *  WebDriver is an Interface
          *  ChromeDriver/FirefoxDriver is a Class (which is related to WebDriver Interface)
          *

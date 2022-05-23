@@ -1,4 +1,14 @@
+import Helper.Misc;
+import Web.MyDriver;
+import org.openqa.selenium.By;
+import org.openqa.selenium.ElementClickInterceptedException;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebElement;
+import org.testng.Assert;
 import org.testng.annotations.Test;
+
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 public class HomeWork4_Sol {
 
@@ -95,7 +105,7 @@ public class HomeWork4_Sol {
         MyDriver.getDriver().findElement(By.linkText("Bulletin")).click();
 
         Set<String> allHandles = MyDriver.getDriver().getWindowHandles();
-        List <String> allHandlesInList = new ArrayList<>(allHandles);
+        List<String> allHandlesInList = new ArrayList<>(allHandles);
         MyDriver.getDriver().switchTo().window(allHandlesInList.get(0)).close();
         MyDriver.getDriver().switchTo().window(allHandlesInList.get(1)).close();
         MyDriver.getDriver().switchTo().window(allHandlesInList.get(3)).close();
